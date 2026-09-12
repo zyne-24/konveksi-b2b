@@ -27,7 +27,7 @@ export function OrderForm() {
 - Info Pembayaran: Siap DP 50% di awal dan pelunasan 50% sebelum pengiriman.`
 
     const encodedMessage = encodeURIComponent(message)
-    window.open(`https://wa.me/6281234567890?text=${encodedMessage}`, '_blank')
+    window.open(`https://wa.me/6288985461525?text=${encodedMessage}`, '_blank')
   }
 
   return (
