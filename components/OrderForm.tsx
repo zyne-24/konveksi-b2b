@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 
 export function OrderForm() {
   const [category, setCategory] = useState('Jas Almamater')
@@ -8,6 +9,7 @@ export function OrderForm() {
   const [material, setMaterial] = useState('American Drill')
   const [customMaterial, setCustomMaterial] = useState('')
   const [notes, setNotes] = useState('')
+  const [designFile, setDesignFile] = useState<File | null>(null)
   const [error, setError] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -19,11 +21,13 @@ export function OrderForm() {
     setError('')
 
     const selectedMaterial = material === 'Lainnya' ? customMaterial : material
+    const fileInfo = designFile ? `\n- File Desain Lampiran: ${designFile.name}` : '\n- File Desain: Tidak ada lampiran'
+
     const message = `Halo Konveksi B2B, saya ingin memesan konveksi custom dengan rincian berikut:
 - Kategori: ${category}
 - Jumlah: ${qty} Pcs
 - Bahan: ${selectedMaterial}
-- Catatan / Desain: ${notes || 'Tidak ada catatan'}
+- Catatan: ${notes || 'Tidak ada catatan'}${fileInfo}
 - Info Pembayaran: Siap DP 50% di awal dan pelunasan 50% sebelum pengiriman.`
 
     const encodedMessage = encodeURIComponent(message)
@@ -31,7 +35,14 @@ export function OrderForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-zinc-200 p-8 rounded-2xl shadow-sm max-w-2xl mx-auto">
+    <motion.form 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      onSubmit={handleSubmit} 
+      className="bg-white border border-zinc-200 p-8 rounded-2xl shadow-sm max-w-2xl mx-auto"
+    >
       <h3 className="text-2xl font-bold tracking-tight text-zinc-950 mb-2">Form Kalkulasi & Order Custom</h3>
       <p className="text-sm text-zinc-500 mb-8">Isi spesifikasi pesanan Anda. Data akan langsung terhubung ke WhatsApp WhatsApp Business kami.</p>
 
@@ -99,7 +110,17 @@ export function OrderForm() {
         )}
 
         <div>
-          <label className="block text-sm font-medium text-zinc-700 mb-2">Catatan Pesanan / Detail Ukuran / Logo</label>
+          <label className="block text-sm font-medium text-zinc-700 mb-2">Upload Desain / Mockup Logo (Opsional)</label>
+          <input 
+            type="file" 
+            onChange={(e) => setDesignFile(e.target.files ? e.target.files[0] : null)}
+            className="w-full bg-white border border-zinc-300 rounded-lg px-4 py-2.5 text-sm text-zinc-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-zinc-900 file:text-white hover:file:bg-zinc-800"
+          />
+          <span className="text-xs text-zinc-500 mt-1.5 block">Format: .ai, .cdr, .pdf, .png, .jpg (Maks. 10MB)</span>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-zinc-700 mb-2">Catatan Pesanan / Detail Ukuran</label>
           <textarea 
             rows={4}
             value={notes}
@@ -124,6 +145,6 @@ export function OrderForm() {
           </button>
         </div>
       </div>
-    </form>
+    </motion.form>
   )
 }
