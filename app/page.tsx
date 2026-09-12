@@ -1,42 +1,73 @@
 import { SplitText } from "@/components/react-bits/SplitText"
+import { SpotlightCard } from "@/components/react-bits/SpotlightCard"
+import { BeamBackground } from "@/components/react-bits/BeamBackground"
+import { MetricsAccordion } from "@/components/react-bits/MetricsAccordion"
+import { FadeInSection } from "@/components/react-bits/FadeInSection"
 import { Navbar } from "@/components/Navbar"
 import { PortfolioGrid } from "@/components/PortfolioGrid"
 import { OrderForm } from "@/components/OrderForm"
 import { HeroCarousel } from "@/components/HeroCarousel"
 import { MaterialDisplay } from "@/components/MaterialDisplay"
-import { FadeInSection } from "@/components/react-bits/FadeInSection"
+import { motion } from "framer-motion"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white relative overflow-hidden">
+      <BeamBackground />
       <Navbar />
       
-      <section className="pt-24 pb-32 border-b border-zinc-100">
+      {/* Hero Section */}
+      <section className="pt-24 pb-32 border-b border-zinc-100 relative">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-4 block">Minimum Order 12 Pcs</span>
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 bg-zinc-100 border border-zinc-200 px-3 py-1 rounded-full text-xs font-medium text-zinc-800 mb-6">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Minimum Order 12 Pcs · Kapasitas Industri B2B
+            </motion.div>
+            
             <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-zinc-950 mb-6 leading-[1.1]">
               <SplitText text="Produksi Seragam Premium untuk Kebutuhan Korporat Anda" />
             </h1>
+            
             <p className="text-lg text-zinc-600 mb-10 max-w-[500px] leading-relaxed">
               Spesialisasi almamater, jas, rompi, dan seragam kantor dengan kualitas jahitan presisi, material terbaik, dan transparansi penuh.
             </p>
-            <a href="#order" className="bg-zinc-950 text-white px-8 py-4 rounded-lg font-medium text-sm hover:bg-zinc-900 transition-all inline-block">
-              Mulai Pesanan Custom
-            </a>
+            
+            <div className="flex items-center gap-4">
+              <a href="#order" className="bg-zinc-950 hover:bg-zinc-900 text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-zinc-950/10 transition-all inline-block">
+                Mulai Pesanan Custom
+              </a>
+              <a href="#portfolio" className="border border-zinc-300 hover:border-zinc-400 bg-white text-zinc-800 font-medium px-6 py-4 rounded-xl transition-all inline-block">
+                Lihat Portofolio
+              </a>
+            </div>
           </div>
           
-          <HeroCarousel />
+          <SpotlightCard className="p-2">
+            <HeroCarousel />
+          </SpotlightCard>
         </div>
       </section>
+
+      {/* Metrics Section (New React Bits interactive component) */}
+      <section className="py-16 max-w-7xl mx-auto px-6 border-b border-zinc-100">
+        <FadeInSection>
+          <MetricsAccordion />
+        </FadeInSection>
+      </section>
       
+      {/* Portfolio Section */}
       <section id="portfolio" className="py-24 max-w-7xl mx-auto px-6">
         <FadeInSection>
-          <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">Hasil Produksi Terpilih</h2>
+          <div className="max-w-xl mb-12">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2 block">Galeri Karya</span>
+            <h2 className="text-3xl font-bold tracking-tighter text-zinc-950">Hasil Produksi Terpilih</h2>
+          </div>
         </FadeInSection>
         <PortfolioGrid />
       </section>
 
+      {/* Material Specs */}
       <section id="materials" className="py-24 bg-zinc-50 border-y border-zinc-200">
         <div className="max-w-7xl mx-auto px-6">
             <FadeInSection>
@@ -47,6 +78,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ */}
       <section id="faq" className="py-24 max-w-7xl mx-auto px-6">
         <FadeInSection>
           <div className="max-w-xl mb-16">
@@ -82,6 +114,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Order Form */}
       <section id="order" className="py-24 bg-zinc-50 border-t border-zinc-200">
         <FadeInSection>
           <OrderForm />
