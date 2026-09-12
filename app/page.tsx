@@ -1,8 +1,10 @@
 import { SplitText } from "@/components/react-bits/SplitText"
-import { SpotlightCard } from "@/components/react-bits/SpotlightCard"
 import { Navbar } from "@/components/Navbar"
 import { PortfolioGrid } from "@/components/PortfolioGrid"
 import { OrderForm } from "@/components/OrderForm"
+import { HeroCarousel } from "@/components/HeroCarousel"
+import { MaterialDisplay } from "@/components/MaterialDisplay"
+import { FadeInSection } from "@/components/react-bits/FadeInSection"
 
 export default function Home() {
   return (
@@ -19,44 +21,71 @@ export default function Home() {
             <p className="text-lg text-zinc-600 mb-10 max-w-[500px] leading-relaxed">
               Spesialisasi almamater, jas, rompi, dan seragam kantor dengan kualitas jahitan presisi, material terbaik, dan transparansi penuh.
             </p>
-            <a href="#order" className="bg-zinc-950 text-white px-8 py-4 rounded-lg font-medium text-sm hover:bg-zinc-900 transition-all">
+            <a href="#order" className="bg-zinc-950 text-white px-8 py-4 rounded-lg font-medium text-sm hover:bg-zinc-900 transition-all inline-block">
               Mulai Pesanan Custom
             </a>
           </div>
           
-          <SpotlightCard className="aspect-[4/3] flex items-center justify-center border border-zinc-200">
-             <img src="https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?q=80&w=2000" alt="Konveksi" className="w-full h-full object-cover"/>
-          </SpotlightCard>
+          <HeroCarousel />
         </div>
       </section>
       
       <section id="portfolio" className="py-24 max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">Hasil Produksi Terpilih</h2>
+        <FadeInSection>
+          <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">Hasil Produksi Terpilih</h2>
+        </FadeInSection>
         <PortfolioGrid />
       </section>
 
-      <section id="materials" className="py-24 bg-zinc-50">
+      <section id="materials" className="py-24 bg-zinc-50 border-y border-zinc-200">
         <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">Spesifikasi Material</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-                {['American Drill', 'Japan Drill', 'Taslan Waterproof'].map(m => (
-                    <div key={m} className="bg-white p-6 rounded-2xl border">{m}</div>
-                ))}
-            </div>
+            <FadeInSection>
+              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2 block">Pilihan Kain Berkualitas Tinggi</span>
+              <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">Spesifikasi Material Terperinci</h2>
+            </FadeInSection>
+            <MaterialDisplay />
         </div>
       </section>
 
       <section id="faq" className="py-24 max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold tracking-tighter text-zinc-950 mb-12">FAQ</h2>
-        <div className="space-y-4">
-            {['Apakah ada min order?', 'Berapa lama pengerjaan?', 'Bisa minta sampel?'].map(q => (
-                <div key={q} className="border-b pb-4">{q}</div>
-            ))}
+        <FadeInSection>
+          <div className="max-w-xl mb-16">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-zinc-500 mb-2 block">Pertanyaan Umum</span>
+            <h2 className="text-3xl font-bold tracking-tighter text-zinc-950">Frequently Asked Questions</h2>
+          </div>
+        </FadeInSection>
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl">
+            <FadeInSection delay={0.1}>
+              <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-200">
+                <h3 className="font-bold text-base text-zinc-950 mb-2">Berapa minimum pemesanan (MOQ)?</h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">Minimum pemesanan adalah 12 pcs per desain/kategori, bisa dikombinasikan dalam berbagai pilihan ukuran (S, M, L, XL, XXL, XXXL).</p>
+              </div>
+            </FadeInSection>
+            <FadeInSection delay={0.2}>
+              <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-200">
+                <h3 className="font-bold text-base text-zinc-950 mb-2">Bagaimana sistem pembayarannya?</h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">Kami menerapkan termin aman: Down Payment (DP) 50% di awal setelah deal quotation, dan pelunasan 50% sisa setelah QC & foto fisik barang jadi dikirim.</p>
+              </div>
+            </FadeInSection>
+            <FadeInSection delay={0.3}>
+              <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-200">
+                <h3 className="font-bold text-base text-zinc-950 mb-2">Berapa lama estimasi waktu produksi?</h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">Estimasi pengerjaan berkisar antara 14 sampai 21 hari kerja tergantung jumlah pesanan dan antrean produksi.</p>
+              </div>
+            </FadeInSection>
+            <FadeInSection delay={0.4}>
+              <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-200">
+                <h3 className="font-bold text-base text-zinc-950 mb-2">Apakah bisa membuat sampel fisik dulu?</h3>
+                <p className="text-sm text-zinc-600 leading-relaxed">Bisa. Untuk pesanan skala besar (di atas 100 pcs), kami menyediakan pembuatan sampel terlebih dahulu sebelum produksi massal.</p>
+              </div>
+            </FadeInSection>
         </div>
       </section>
 
-      <section id="order" className="py-24 max-w-7xl mx-auto px-6">
-        <OrderForm />
+      <section id="order" className="py-24 bg-zinc-50 border-t border-zinc-200">
+        <FadeInSection>
+          <OrderForm />
+        </FadeInSection>
       </section>
     </main>
   )
