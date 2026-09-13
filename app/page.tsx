@@ -1,3 +1,7 @@
+"use client"
+
+import React from 'react'
+import { motion } from 'framer-motion'
 import { SplitText } from "@/components/react-bits/SplitText"
 import { SpotlightCard } from "@/components/react-bits/SpotlightCard"
 import { BeamBackground } from "@/components/react-bits/BeamBackground"
@@ -8,7 +12,6 @@ import { PortfolioGrid } from "@/components/PortfolioGrid"
 import { OrderForm } from "@/components/OrderForm"
 import { HeroCarousel } from "@/components/HeroCarousel"
 import { MaterialDisplay } from "@/components/MaterialDisplay"
-import { motion } from "framer-motion"
 
 export default function Home() {
   return (
